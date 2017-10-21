@@ -27,6 +27,18 @@ def deleted_old_files(folder):
                 os.remove(file_name)
 
 
+def deleted_empty_dirs(folder):
+    global TOTAL_DELETED_DIRS
+    empty_folders = 0
+    for path, dirs, files in os.walk(folder):
+        if not dirs and not files:
+            TOTAL_DELETED_DIRS += 1
+            print("Deleting empty dir: " + str(path))
+            os.rmdir(path)
+    if empty_folders > 0:
+        deleted_empty_dirs()
+
+
 def main():
     pass
 
